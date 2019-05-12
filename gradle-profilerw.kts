@@ -16,7 +16,7 @@ import java.io.File
 
 fun quit() = System.exit(1)
 
-val currentVersion = "1.0"
+val currentVersion = "1.1"
 
 if (args.contains("--version") || args.contains("-v")) {
     println("gradle-profilerw version is $currentVersion")
@@ -59,7 +59,7 @@ val forceUpdate = args.contains("--force-update")
 @Suppress("PropertyName")
 val ONE_DAY_IN_MILLIS = 1000 * 60 * 60 * 24
 
-if (currentTime > lastUpdated + ONE_DAY_IN_MILLIS || !forceUpdate) {
+if (currentTime < lastUpdated + ONE_DAY_IN_MILLIS && !forceUpdate) {
     lastUpdatedFile.writeText(currentTime.toString())
     runProfiler()
     quit()
