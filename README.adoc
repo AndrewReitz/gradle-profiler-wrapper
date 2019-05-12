@@ -8,8 +8,8 @@ script to run an up to date version of the gradle profiler.
 
 == Usage
 
-To use the wrapper, simply download the binary from github and run it like you 
-would run the gradle-profiler. 
+To use the wrapper, simply https://github.com/AndrewReitz/gradle-profiler-wrapper/releases/latest[download the binary from github] 
+and run it like you would run the gradle-profiler. 
 
 Example: 
 `gradle-profilerw --profiler buildscan --build-dir /path/to/project assemble`. 
