@@ -13,10 +13,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import java.io.File
+import java.nio.file.Paths
 
 fun quit() = System.exit(1)
 
-val currentVersion = "1.1"
+val currentVersion = "1.2"
 
 if (args.contains("--version") || args.contains("-v")) {
     println("gradle-profilerw version is $currentVersion")
@@ -39,8 +40,12 @@ fun File.run(
 
 fun runProfiler() {
     val input = if (args.contains("--output-dir")) args else args.plus("--output-dir").plus(File(".").absolutePath)
-    File(gradleProfilerSrc, "build/install/gradle-profiler/bin").run("./gradle-profiler", *input,
-            standardOutput = ProcessBuilder.Redirect.INHERIT)
+    
+    Paths.get("").toAbsolutePath().toFile().run(
+            File(gradleProfilerSrc, "build/install/gradle-profiler/bin/gradle-profiler").absolutePath,
+            *input,
+            standardOutput = ProcessBuilder.Redirect.INHERIT
+    )
 }
 
 val gradleUserHome: String = System.getenv("GRADLE_USER_HOME")
